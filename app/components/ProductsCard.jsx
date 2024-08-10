@@ -1,9 +1,10 @@
+import Image from "next/image";
 import React from "react";
 
 const ProductsCard = ({ product }) => {
-  const { image, title, price } = product;
+  const { photoUrl, name, price } = product;
   return (
-    <a href="#" className="group relative block overflow-hidden">
+    <a href="#" className="group relative block overflow-hidden shadow-lg">
       <button className="absolute end-4 top-4 z-10 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75">
         <span className="sr-only">Wishlist</span>
 
@@ -23,10 +24,13 @@ const ProductsCard = ({ product }) => {
         </svg>
       </button>
 
-      <img
-        src={image}
+      <Image
+        width={200}
+        height={200}
+        src={photoUrl}
         alt=""
-        className="h-64 w-full object-contain transition duration-500 group-hover:scale-105 sm:h-72"
+        loading="lazy"
+        className="h-64 w-full object-fill transition duration-500 group-hover:scale-105 sm:h-72"
       />
 
       <div className="relative border border-gray-100 bg-white p-6">
@@ -36,7 +40,7 @@ const ProductsCard = ({ product }) => {
         </span>
 
         <h3 className="mt-4 text-lg font-medium text-gray-900">
-          {title.slice(0, 37)}..
+          {name.slice(0, 37)}..
         </h3>
 
         <p className="mt-1.5 text-sm text-gray-700">${price}</p>
