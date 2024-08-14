@@ -1,16 +1,26 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: [
-      "img.freepik.com",
-      "images.pexels.com",
-      "cdn.dummyjson.com",
-      "i.ibb.co",
-    ],
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "**",
+        hostname: "img.freepik.com",
+      },
+      {
+        protocol: "https",
+        hostname: "images.pexels.com",
+      },
+      {
+        protocol: "https",
+        hostname: "cdn.dummyjson.com",
+      },
+      {
+        protocol: "https",
+        hostname: "i.ibb.co",
+      },
+      {
+        protocol: "https",
+        hostname: "**", // Wildcard pattern for all other hosts
       },
     ],
   },
