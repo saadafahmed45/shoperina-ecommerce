@@ -15,9 +15,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className=" hidden lg:flex">
-          <Banner />
-        </div>
         <Navbar />
         {children}
         <Footer />

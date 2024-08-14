@@ -7,6 +7,12 @@ const nextConfig = {
       "cdn.dummyjson.com",
       "i.ibb.co",
     ],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",
+      },
+    ],
   },
 };
 
