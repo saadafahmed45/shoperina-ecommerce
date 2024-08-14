@@ -1,10 +1,12 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const ProductsCard = ({ product }) => {
-  const { photoUrl, name, price } = product;
+  const { images, title, price, id, description, thumbnail } = product;
+
   return (
-    <a href="#" className="group relative block overflow-hidden shadow-lg">
+    <div className="group relative block overflow-hidden shadow-lg">
       <button className="absolute end-4 top-4 z-10 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75">
         <span className="sr-only">Wishlist</span>
 
@@ -23,15 +25,16 @@ const ProductsCard = ({ product }) => {
           />
         </svg>
       </button>
-
-      <Image
-        width={200}
-        height={200}
-        src={photoUrl}
-        alt=""
-        loading="lazy"
-        className="h-64 w-full object-fill transition duration-500 group-hover:scale-105 sm:h-72"
-      />
+      <Link href={`/products/${id}`}>
+        <Image
+          width={200}
+          height={200}
+          src={images[0]}
+          alt=""
+          loading="lazy"
+          className="h-64 w-full object-fill transition duration-500 group-hover:scale-105 sm:h-72 cursor-pointer"
+        />
+      </Link>
 
       <div className="relative border border-gray-100 bg-white p-6">
         <span className="whitespace-nowrap bg-yellow-400 px-3 py-1.5 text-xs font-medium">
@@ -40,7 +43,7 @@ const ProductsCard = ({ product }) => {
         </span>
 
         <h3 className="mt-4 text-lg font-medium text-gray-900">
-          {name.slice(0, 37)}..
+          {title.slice(0, 37)}..
         </h3>
 
         <p className="mt-1.5 text-sm text-gray-700">${price}</p>
@@ -51,7 +54,7 @@ const ProductsCard = ({ product }) => {
           </button>
         </form>
       </div>
-    </a>
+    </div>
   );
 };
 

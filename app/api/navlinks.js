@@ -16,10 +16,17 @@ export const navlinks = [
     name: "Products",
     url: "/products",
   },
+
   {
     id: 4,
 
-    name: "Cart",
-    url: "/cart",
+    name: "Login",
+    url: "/login",
+  },
+  {
+    id: 5,
+
+    name: "Contact",
+    url: "/contact",
   },
 ];

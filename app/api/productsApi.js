@@ -1,8 +1,13 @@
-import React from "react";
+// product api url
+export const apiUrl = "https://dummyjson.com/products";
+// all products fetching
+export async function productsApi() {
+  const res = await fetch(apiUrl, { cache: "force-cache" });
+  return res.json();
+}
 
-const apiUrl = "https://ira-fashion-server.onrender.com/products";
-export default async function productsApi() {
-  const res = await fetch(apiUrl);
-  const data = await res.json();
-  return data;
+// all products fetching
+export async function singleProductsApi() {
+  const res = await fetch(apiUrl, { cache: "force-cache" });
+  return res.json();
 }

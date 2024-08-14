@@ -5,6 +5,7 @@ import Link from "next/link";
 import MobileNav from "../components/MobileNav";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoMdClose } from "react-icons/io";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -13,25 +14,30 @@ const Navbar = () => {
     console.log("click the nav");
   };
   return (
-    <div className="bg-[#2D3250] py-3">
+    <div className="bg-gray-900 text-white py-4">
       <div className="container px-4 mx-auto reletive">
         <nav className="  text-white flex items-center justify-between  ">
           {/* logo  */}
-          <div className="text-2xl font-bold uppercase">
-            <h3>Logo</h3>
-          </div>
+          <Link href={"/"} className="text-2xl font-bold ">
+            <h3>Shoperina</h3>
+          </Link>
           {/* nav link  */}
-          <ul className="hidden lg:flex gap-6">
+          <ul className="hidden lg:flex gap-6 item-center">
             {navlinks.map((nav, index) => (
               <li key={nav.id}>
                 <Link
-                  className="hover:text-orange-200 text-lg uppercase"
+                  className="hover:text-orange-200 text-md uppercase"
                   href={nav.url}
                 >
                   {nav.name}
                 </Link>
               </li>
             ))}
+            <li>
+              <Link className="hover:text-orange-200 text-xl " href={"/cart"}>
+                <AiOutlineShoppingCart />
+              </Link>
+            </li>
           </ul>
           {/* mobile nav  */}
 
