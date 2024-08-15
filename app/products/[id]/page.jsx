@@ -3,13 +3,14 @@
 import { singleProductsApi } from "@/app/api/productsApi";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import ReactStars from "react-rating-stars-component";
 
 const SingleProduct = ({ params }) => {
   const id = params.id;
   const [product, setProduct] = useState([]);
-
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -28,7 +29,6 @@ const SingleProduct = ({ params }) => {
     fetchData();
   }, []);
 
-  // console.log(data);
   const {
     images,
     title,
@@ -39,6 +39,15 @@ const SingleProduct = ({ params }) => {
     rating,
     brand,
   } = product;
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error.message}</p>;
+  }
+
   return (
     <div>
       <div className="bg-gray-100 min-h-screen font-sans px-8">
@@ -121,19 +130,17 @@ const SingleProduct = ({ params }) => {
             {/* Product Details */}
             <div className="w-full md:w-1/2 p-6 flex flex-col justify-between">
               <div>
-                <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
-                <p className="text-gray-600 mb-4">{product.des}</p>
+                <h1 className="text-3xl font-bold mb-4">{title}</h1>
+                <p className="text-gray-600 mb-4">{description}</p>
 
                 <div className="flex items-center mb-4">
                   <span className="text-2xl font-bold text-gray-900">
                     ${price}
                   </span>
                   <span className="text-gray-500 ml-4 text-sm line-through">
-                    $200
+                    ${price + price * (discountPercentage / 100)}
                   </span>
                 </div>
-
-                <p className="text-gray-700 mb-6">{description}</p>
 
                 <div className="flex space-x-4 mb-6">
                   <button className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600">
@@ -145,8 +152,17 @@ const SingleProduct = ({ params }) => {
                 </div>
                 {/* rate  */}
                 <div className="flex flex-col gap-4">
-                  <span> Brand: {brand}</span>
-                  <span> rating: {rating}</span>
+                  <span> Brand: {brand}</span>{" "}
+                  <span>
+                    Rating:
+                    <ReactStars
+                      count={5}
+                      value={rating}
+                      size={24}
+                      edit={false}
+                      activeColor="#ffd700"
+                    />
+                  </span>{" "}
                 </div>
               </div>
             </div>

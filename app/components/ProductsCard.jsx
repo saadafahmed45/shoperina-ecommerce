@@ -1,9 +1,11 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import ReactStars from "react-rating-stars-component";
 
 const ProductsCard = ({ product }) => {
-  const { images, title, price, id, description, thumbnail } = product;
+  const { images, title, price, id, description, thumbnail, rating } = product;
 
   return (
     <div className="group relative block overflow-hidden shadow-lg">
@@ -47,6 +49,16 @@ const ProductsCard = ({ product }) => {
         </h3>
 
         <p className="mt-1.5 text-sm text-gray-700">${price}</p>
+        <div className="mt-1.5 text-md text-gray-700">
+          <ReactStars
+            count={5}
+            value={rating}
+            // onChange={ratingChanged}
+            size={20}
+            edit={false}
+            activeColor="#ffd700"
+          />
+        </div>
 
         <form className="mt-4">
           <button className="block w-full rounded bg-yellow-400 p-4 text-sm font-medium transition hover:scale-105">
