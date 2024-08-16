@@ -17,14 +17,14 @@ export const navlinks = [
     url: "/products",
   },
 
+  // {
+  //   id: 4,
+
+  //   name: "Login",
+  //   url: "/login",
+  // },
   {
     id: 4,
-
-    name: "Login",
-    url: "/login",
-  },
-  {
-    id: 5,
 
     name: "Contact",
     url: "/contact",

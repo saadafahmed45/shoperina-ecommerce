@@ -6,7 +6,7 @@ import MobileNav from "../components/MobileNav";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoMdClose } from "react-icons/io";
 import { AiOutlineShoppingCart } from "react-icons/ai";
-
+import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const toggleButton = () => {
@@ -33,6 +33,19 @@ const Navbar = () => {
                 </Link>
               </li>
             ))}
+            <li>
+              <SignedOut>
+                <SignInButton>
+                  <button className="hover:text-orange-200 text-lg uppercase">
+                    {" "}
+                    Sign In
+                  </button>
+                </SignInButton>
+              </SignedOut>
+              <SignedIn>
+                <UserButton />
+              </SignedIn>
+            </li>
             <li>
               <Link className="hover:text-orange-200 text-xl " href={"/cart"}>
                 <AiOutlineShoppingCart />
@@ -64,6 +77,19 @@ const Navbar = () => {
                   </Link>
                 </li>
               ))}
+              <li>
+                <SignedOut>
+                  <SignInButton>
+                    <button className="hover:text-orange-200 text-lg uppercase">
+                      {" "}
+                      Sing In
+                    </button>
+                  </SignInButton>
+                </SignedOut>
+                <SignedIn>
+                  <UserButton />
+                </SignedIn>
+              </li>
             </ul>
           </div>
         )}

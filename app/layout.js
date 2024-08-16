@@ -3,7 +3,10 @@ import "./globals.css";
 import Navbar from "./shared/Navbar";
 import Footer from "./shared/Footer";
 import Banner from "./components/Banner";
+import {
+  ClerkProvider,
 
+} from "@clerk/nextjs";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -13,12 +16,15 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <Navbar />
-        {children}
-        <Footer />
-      </body>
-    </html>
+   
+    <ClerkProvider>
+      <html lang="en">
+        <body>
+          <Navbar />
+          {children}
+          <Footer />
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
