@@ -4,6 +4,7 @@ import { singleProductsApi } from "@/app/api/productsApi";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import ReactStars from "react-rating-stars-component";
+import loading from "./../../loading";
 
 const SingleProduct = ({ params }) => {
   const id = params.id;
@@ -41,7 +42,11 @@ const SingleProduct = ({ params }) => {
   } = product;
 
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="flex items-center justify-center p-16 h-screen">
+        <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-violet-600"></div>
+      </div>
+    );
   }
 
   if (error) {
@@ -120,7 +125,7 @@ const SingleProduct = ({ params }) => {
             {/* Product Image */}
             <div className="w-full md:w-1/2 p-6">
               <img
-                src={thumbnail}
+                src={images[0]}
                 alt={title}
                 loading="lazy"
                 className="w-full h-full object-cover rounded-lg"

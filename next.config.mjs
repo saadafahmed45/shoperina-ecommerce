@@ -18,13 +18,8 @@ const nextConfig = {
         protocol: "https",
         hostname: "i.ibb.co",
       },
-      {
-        protocol: "https",
-        hostname: "gravatar.com", // Wildcard pattern for all other hosts
-      },
     ],
   },
-  swcMinify: false,
 };
 
 export default nextConfig;

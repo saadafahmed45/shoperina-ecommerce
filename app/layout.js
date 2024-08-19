@@ -3,10 +3,8 @@ import "./globals.css";
 import Navbar from "./shared/Navbar";
 import Footer from "./shared/Footer";
 import Banner from "./components/Banner";
-import {
-  ClerkProvider,
+import { ToastContainer } from "react-toastify";
 
-} from "@clerk/nextjs";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -16,15 +14,14 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-   
-    <ClerkProvider>
-      <html lang="en">
-        <body>
-          <Navbar />
-          {children}
-          <Footer />
-        </body>
-      </html>
-    </ClerkProvider>
+    <html lang="en">
+      <body>
+        <Navbar />
+        {children}
+      <ToastContainer />
+
+        <Footer />
+      </body>
+    </html>
   );
 }

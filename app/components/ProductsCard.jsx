@@ -6,7 +6,9 @@ import ReactStars from "react-rating-stars-component";
 
 const ProductsCard = ({ product }) => {
   const { images, title, price, id, description, thumbnail, rating } = product;
-
+  const handleAddedCart = () => {
+    console.log("added");
+  };
   return (
     <div className="group relative block overflow-hidden shadow-lg">
       <button className="absolute end-4 top-4 z-10 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75">
@@ -33,7 +35,7 @@ const ProductsCard = ({ product }) => {
           height={200}
           src={images[0]}
           alt=""
-          loading="lazy"
+          // loading="lazy"
           className="h-64 w-full object-fill transition duration-500 group-hover:scale-105 sm:h-72 cursor-pointer"
         />
       </Link>
@@ -51,20 +53,22 @@ const ProductsCard = ({ product }) => {
         <p className="mt-1.5 text-sm text-gray-700">${price}</p>
         <div className="mt-1.5 text-md text-gray-700">
           <ReactStars
-            count={5}
+            // count={5}
             value={rating}
-            // onChange={ratingChanged}
             size={20}
             edit={false}
             activeColor="#ffd700"
           />
         </div>
 
-        <form className="mt-4">
-          <button className="block w-full rounded bg-yellow-400 p-4 text-sm font-medium transition hover:scale-105">
+        <div className="mt-4">
+          <button
+            onClick={handleAddedCart}
+            className="block w-full rounded bg-yellow-400 p-4 text-sm font-medium transition hover:scale-105"
+          >
             Add to Cart
           </button>
-        </form>
+        </div>
       </div>
     </div>
   );
