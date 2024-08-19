@@ -1,24 +1,43 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 // import productsApi from "../api/productsApi";
 import ProductsCard from "../components/ProductsCard";
 import { productsApi } from "../api/productsApi";
 
 const Products = async () => {
-  const product = await productsApi();
+  // const product = await productsApi();
   // console.log(products);
-  const products = product.products;
+  // const products = product.products;
   // // data filtering start
   // const [quary, setQuary] = useState("");
 
   // console.log(product.filter((pr) => pr.title.toLowerCase().includes(quary)));
   // // console.log(quary);
 
+  const [products, setProduct] = useState([]);
+  const [visible, setVisible] = useState(15);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(`https://dummyjson.com/products/`);
+      const result = await response.json();
+      setProduct(result.products);
+    };
+
+    fetchData();
+  }, []);
   return (
     <div className=" mx-8 lg:mx-24 my-16">
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 items-center">
-        {products.map((product, index) => (
+        {products.slice(0, visible).map((product, index) => (
           <ProductsCard product={product} key={product.id} />
         ))}
+      </div>
+      <div className="text-center ">
+        {" "}
+        <button className="bg-purple-700 text-white py-2 px-2 hover:bg-purple-600">
+          see more{" "}
+        </button>
       </div>
     </div>
   );
