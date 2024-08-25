@@ -15,7 +15,13 @@ const Products = async () => {
   // // console.log(quary);
 
   const [products, setProduct] = useState([]);
-  const [visible, setVisible] = useState(15);
+  const [visible, setVisible] = useState(8);
+
+  const visibleProducts = products.slice(0, visible);
+
+  const loadMore = () => {
+    setVisible(visible + visible);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,15 +33,18 @@ const Products = async () => {
     fetchData();
   }, []);
   return (
-    <div className=" mx-8 lg:mx-24 my-16">
+    <div className=" mx-8 lg:mx-24 my-16 space-y-8">
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 items-center">
-        {products.slice(0, visible).map((product, index) => (
+        {visibleProducts.map((product, index) => (
           <ProductsCard product={product} key={product.id} />
         ))}
       </div>
-      <div className="text-center ">
+      <div className="text-center  ">
         {" "}
-        <button className="bg-purple-700 text-white py-2 px-2 hover:bg-purple-600">
+        <button
+          className="bg-purple-700 text-white py-2 px-2 hover:bg-purple-600"
+          onClick={() => loadMore()}
+        >
           see more{" "}
         </button>
       </div>
