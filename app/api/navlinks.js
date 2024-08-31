@@ -29,4 +29,10 @@ export const navlinks = [
     name: "Contact",
     url: "/contact",
   },
+  {
+    id: 5,
+
+    name: "Dashboard",
+    url: "/dashboard",
+  },
 ];

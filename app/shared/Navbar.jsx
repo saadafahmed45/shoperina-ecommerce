@@ -5,8 +5,10 @@ import MobileNav from "../components/MobileNav";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoMdClose } from "react-icons/io";
 import { AiOutlineShoppingCart } from "react-icons/ai";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import Sidebar from "../(dashboards)/components/Sidebar";
+import Dashboard from "../(dashboards)/dashboard/page";
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
@@ -49,6 +51,17 @@ const Navbar = () => {
     };
   }, [lastScrollY]);
 
+  const pathName = usePathname();
+  const router = useRouter();
+
+  if (pathName.includes("dashboard"))
+    return (
+      <div className="bg-red-700 w-20 flex justify-between">
+        {/* <Sidebar /> */}
+        <Dashboard />
+      </div>
+    );
+
   return (
     <div
       className={`fixed top-0  py-4 z-50 w-full  bg-gray-900 backdrop-blur-2xl px-1 transition-transform duration-300 md:px-5 lg:px-20 ${
@@ -66,19 +79,27 @@ const Navbar = () => {
             {navlinks.map((nav, index) => (
               <li key={nav.id}>
                 <Link
-                  className="hover:text-orange-200 text-md uppercase"
+                  className={`${
+                    pathName === nav.url
+                      ? " text-md uppercase text-yellow-400"
+                      : "text-md uppercase text-white"
+                  }`}
+                  // className="hover:text-orange-200 text-md uppercase"
                   href={nav.url}
                 >
                   {nav.name}
                 </Link>
               </li>
             ))}
-            <li>
-              <button className="hover:text-orange-200 text-lg uppercase">
+            {/* <li>
+              <Link
+                href={"login"}
+                className="hover:text-orange-200 text-lg uppercase"
+              >
                 {" "}
                 Sign In
-              </button>
-            </li>
+              </Link>
+            </li> */}
             <li>
               <Link className="hover:text-orange-200 text-xl " href={"/cart"}>
                 <AiOutlineShoppingCart />
