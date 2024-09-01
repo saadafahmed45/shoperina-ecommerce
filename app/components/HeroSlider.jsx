@@ -30,7 +30,7 @@ const HeroSlider = () => {
                   src="https://images.pexels.com/photos/135620/pexels-photo-135620.jpeg"
                 />
                 <div className="absolute left-1/2 top-1/2 z-40 w-full -translate-x-1/2 -translate-y-1/2 transform">
-                  <h2>Hero text</h2>
+                  <h2>Hero textssadsa</h2>
                 </div>
               </div>
             </SwiperSlide>

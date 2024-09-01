@@ -29,7 +29,6 @@ const Products = async () => {
       .then((data) => setProduct(data.products));
   }, []);
 
-
   return (
     <div className=" mx-8 lg:mx-24 my-16 space-y-8">
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 items-center">
@@ -37,7 +36,7 @@ const Products = async () => {
           <ProductsCard product={product} key={product.id} />
         ))}
       </div>
-      <div className="text-center  ">
+      <div className="text-center">
         {" "}
         <button
           className="bg-purple-700 text-white py-2 px-2 hover:bg-purple-600"
