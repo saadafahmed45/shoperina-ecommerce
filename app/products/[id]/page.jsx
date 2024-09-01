@@ -1,6 +1,6 @@
 "use client";
 
-import { singleProductsApi } from "@/app/api/productsApi";
+// import { singleProductsApi } from "@/app/api/productsApi";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import ReactStars from "react-rating-stars-component";
