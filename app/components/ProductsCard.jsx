@@ -1,14 +1,15 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useContext } from "react";
 import ReactStars from "react-rating-stars-component";
+import { MyContext } from "../context/MyContext";
 
 const ProductsCard = ({ product }) => {
   const { images, title, price, id, description, thumbnail, rating } = product;
-  const handleAddedCart = () => {
-    console.log("added");
-  };
+
+  const { cartItems, handleAddedCart } = useContext(MyContext);
+
   return (
     <div className="group relative block overflow-hidden shadow-lg">
       <button className="absolute end-4 top-4 z-10 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75">
@@ -63,7 +64,7 @@ const ProductsCard = ({ product }) => {
 
         <div className="mt-4">
           <button
-            onClick={handleAddedCart}
+            onClick={() => handleAddedCart(product)}
             className="block w-full rounded bg-yellow-400 p-4 text-sm font-medium transition hover:scale-105"
           >
             Add to Cart

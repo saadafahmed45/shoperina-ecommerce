@@ -7,8 +7,6 @@ import { IoMdClose } from "react-icons/io";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import Sidebar from "../(dashboards)/components/Sidebar";
-import Dashboard from "../(dashboards)/dashboard/page";
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
@@ -54,13 +52,8 @@ const Navbar = () => {
   const pathName = usePathname();
   const router = useRouter();
 
-  if (pathName.includes("dashboard"))
-    return (
-      <div className="bg-red-700 w-20 flex justify-between">
-        {/* <Sidebar /> */}
-        <Dashboard />
-      </div>
-    );
+  // if (pathName.includes("dashboard"))
+  //   return <div className="bg-red-700 w-20 flex justify-between"></div>;
 
   return (
     <div
@@ -91,18 +84,29 @@ const Navbar = () => {
                 </Link>
               </li>
             ))}
-            {/* <li>
-              <Link
-                href={"login"}
-                className="hover:text-orange-200 text-lg uppercase"
-              >
-                {" "}
-                Sign In
-              </Link>
-            </li> */}
+
             <li>
-              <Link className="hover:text-orange-200 text-xl " href={"/cart"}>
+              <Link
+                className={`${
+                  pathName === "/cart"
+                    ? " text-xl uppercase text-yellow-400"
+                    : "text-xl uppercase text-white"
+                }`}
+                href={"/cart"}
+              >
                 <AiOutlineShoppingCart />
+              </Link>
+            </li>
+            <li>
+              <Link
+                className={`${
+                  pathName === "/login"
+                    ? " text-md uppercase font-semibold text-slate-700 bg-yellow-400 px-2 py-1"
+                    : "text-md font-semibold uppercase text-slate-700 bg-yellow-400 px-2 py-1"
+                }`}
+                href={"login"}
+              >
+                Login
               </Link>
             </li>
           </ul>

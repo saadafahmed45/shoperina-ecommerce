@@ -24,14 +24,12 @@ const Products = async () => {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(`https://dummyjson.com/products/`);
-      const result = await response.json();
-      setProduct(result.products);
-    };
-
-    fetchData();
+    fetch(`https://dummyjson.com/products/`)
+      .then((response) => response.json())
+      .then((data) => setProduct(data.products));
   }, []);
+
+
   return (
     <div className=" mx-8 lg:mx-24 my-16 space-y-8">
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 items-center">
