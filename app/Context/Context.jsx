@@ -1,6 +1,8 @@
-import React from "react";
+import React, { createContext } from "react";
 
 const Context = () => {
+  const Context = createContext();
+
   return <div>Context</div>;
 };
 

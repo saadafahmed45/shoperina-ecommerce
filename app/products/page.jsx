@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 // import productsApi from "../api/productsApi";
 import ProductsCard from "../components/ProductsCard";
-import { productsApi } from "../api/productsApi";
+// import { productsApi } from "../api/productsApi";
 
 const Products = async () => {
   // const product = await productsApi();
