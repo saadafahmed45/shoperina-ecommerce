@@ -25,4 +25,9 @@ export const navlinks = [
     name: "Dashboard",
     url: "/dashboard",
   },
+  {
+    id: 4,
+    name: "Search",
+    url: "/searchProducts",
+  },
 ];

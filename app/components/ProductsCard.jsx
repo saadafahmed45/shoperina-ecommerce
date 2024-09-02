@@ -37,18 +37,18 @@ const ProductsCard = ({ product }) => {
           src={images[0]}
           alt=""
           // loading="lazy"
-          className="h-64 w-full object-fill transition duration-500 group-hover:scale-105 sm:h-72 cursor-pointer"
+          className="h-64 w-full object-contain transition duration-500 group-hover:scale-105 sm:h-72 cursor-pointer"
         />
       </Link>
 
-      <div className="relative border border-gray-100 bg-white p-6">
-        <span className="whitespace-nowrap bg-yellow-400 px-3 py-1.5 text-xs font-medium">
+      <div className="relative border border-gray-100 bg-white p-4">
+        {/* <span className="whitespace-nowrap bg-yellow-400 px-3 py-1.5 text-xs font-medium">
           {" "}
           New{" "}
-        </span>
+        </span> */}
 
-        <h3 className="mt-4 text-lg font-medium text-gray-900">
-          {title.slice(0, 37)}..
+        <h3 className="mt-4 text-sm md:text-lg font-medium text-gray-900">
+          {title.slice(0, 30)}..
         </h3>
 
         <p className="mt-1.5 text-sm text-gray-700">${price}</p>
@@ -62,10 +62,10 @@ const ProductsCard = ({ product }) => {
           />
         </div>
 
-        <div className="mt-4">
+        <div className="mt-2">
           <button
             onClick={() => handleAddedCart(product)}
-            className="block w-full rounded bg-yellow-400 p-4 text-sm font-medium transition hover:scale-105"
+            className="block w-full rounded bg-yellow-400 p-2 md:p-4 text-sm font-medium transition hover:scale-105"
           >
             Add to Cart
           </button>

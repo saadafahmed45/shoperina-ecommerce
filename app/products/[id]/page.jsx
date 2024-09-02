@@ -120,7 +120,7 @@ const SingleProduct = ({ params }) => {
         </nav>
         {/* Breadcrumb */}
         {/* Main Content */}
-        <main className="py-12">
+        <main className="py-6">
           <div className="container mx-auto flex flex-col md:flex-row bg-white shadow-lg rounded-lg">
             {/* Product Image */}
             <div className="w-full md:w-1/2 p-6">

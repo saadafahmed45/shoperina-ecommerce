@@ -127,20 +127,51 @@ const Navbar = () => {
         </nav>
         {open && (
           <div
-            className="fixed  right-0 z-20 bg-[#2D3250]  w-full p-12 
+            className="fixed mt-2 text-center right-0 z-20 bg-[#2D3250]  w-full p-12 
           flex flex-col justify-center items-center lg:hidden"
           >
             <ul>
               {navlinks.map((nav, index) => (
                 <li key={nav.id} className="py-4 text-white">
                   <Link
-                    className="hover:text-orange-200 text-lg uppercase"
+                   className={`${
+                    pathName === nav.url
+                      ? " text-md uppercase text-yellow-400"
+                      : "text-md uppercase text-white"
+                  }`}
                     href={nav.url}
                   >
                     {nav.name}
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link
+                  className={`${
+                    pathName === "/cart"
+                      ? " text-xl gap-2 items-center uppercase flex text-yellow-400"
+                      : "text-xl gap-2 items-center uppercase flex text-white"
+                  }`}
+                  href={"/cart"}
+                >
+                  <AiOutlineShoppingCart />{" "}
+                  <span className="bg-red-600 rounded-full p-1">
+                    {cartItems.length}
+                  </span>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className={`${
+                    pathName === "/login"
+                      ? " text-md uppercase font-semibold text-slate-700 bg-yellow-400 px-2 py-1"
+                      : "text-md font-semibold uppercase text-slate-700 bg-yellow-400 px-2 py-1"
+                  }`}
+                  href={"login"}
+                >
+                  Login
+                </Link>
+              </li>
             </ul>
           </div>
         )}

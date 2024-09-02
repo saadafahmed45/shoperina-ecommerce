@@ -11,6 +11,10 @@ const CartPage = () => {
     router.push("/");
   };
   const subtotal = cartItems.reduce((total, item) => total + item.price * 1, 0);
+
+  if (cartItems.length == 0) {
+  }
+
   return (
     <div className="flex justify-center items-center mt-8 px-24 py-16">
       <div className="flex flex-col max-w-3xl p-6 space-y-4 sm:p-10 bg-gray-50 text-gray-800">
