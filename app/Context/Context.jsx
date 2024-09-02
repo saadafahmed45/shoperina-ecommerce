@@ -1,10 +1,11 @@
 "use client";
-import { createContext, useState } from "react";
+
+import { createContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 
-export const MyContext = createContext();
+export const MyContext = createContext([]);
 
-export const MyProvider = ({ children }) => {
+const ContextProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
 
   const handleAddedCart = (item) => {
@@ -31,9 +32,12 @@ export const MyProvider = ({ children }) => {
     });
   };
   console.log(cartItems.length);
+
   return (
     <MyContext.Provider value={{ cartItems, handleAddedCart }}>
       {children}
-    </MyContext.Provider>
+    </MyContext.Provider>   
   );
 };
+
+export default ContextProvider;

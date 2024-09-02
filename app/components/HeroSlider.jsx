@@ -11,7 +11,7 @@ import Image from "next/image";
 const HeroSlider = () => {
   return (
     <div>
-      <div className="mt-18 flex flex-col">
+      <div className="mt-18 py-16 px-6 flex flex-col">
         <section className="relative">
           <Swiper
             pagination={{
@@ -26,7 +26,7 @@ const HeroSlider = () => {
             <SwiperSlide>
               <div className="relative">
                 <img
-                  className="h-screen w-full select-none object-cover"
+                  className="lg:h-screen h-1/2 w-full select-none object-cover"
                   src="https://images.pexels.com/photos/135620/pexels-photo-135620.jpeg"
                 />
                 <div className="absolute left-1/2 top-1/2 z-40 w-full -translate-x-1/2 -translate-y-1/2 transform">
@@ -37,7 +37,7 @@ const HeroSlider = () => {
             <SwiperSlide>
               <div>
                 <img
-                  className="h-screen w-full select-none object-cover"
+                  className="lg:h-screen h-1/2 w-full select-none object-cover"
                   src="https://images.pexels.com/photos/853151/pexels-photo-853151.jpeg"
                   alt="img"
                 />
@@ -46,7 +46,7 @@ const HeroSlider = () => {
             <SwiperSlide>
               <div>
                 <img
-                  className="h-screen w-full select-none object-cover"
+                  className="lg:h-screen h-1/2 w-full select-none object-cover"
                   src="https://images.pexels.com/photos/920382/pexels-photo-920382.jpeg"
                   alt=""
                 />
@@ -55,7 +55,7 @@ const HeroSlider = () => {
             <SwiperSlide>
               <div>
                 <img
-                  className="h-screen w-full select-none object-cover"
+                  className="lg:h-screen h-1/2 w-full select-none object-fill"
                   src="https://images.pexels.com/photos/1778412/pexels-photo-1778412.jpeg"
                   alt=""
                 />

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 // import productsApi from "../api/productsApi";
 import ProductsCard from "../components/ProductsCard";
 // import { productsApi } from "../api/productsApi";
-
+import axios from "axios";
 const Products = async () => {
   // const product = await productsApi();
   // console.log(products);
@@ -24,9 +24,20 @@ const Products = async () => {
   };
 
   useEffect(() => {
-    fetch(`https://dummyjson.com/products/`)
-      .then((response) => response.json())
-      .then((data) => setProduct(data.products));
+    axios
+      .get(`https://dummyjson.com/products/`)
+      .then(function (response) {
+        // handle success
+        setProduct(response.data.products);
+        // console.log(response.data.products);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .finally(function () {
+        // always executed
+      });
   }, []);
 
   return (

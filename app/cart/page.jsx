@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useContext } from "react";
-import { MyContext } from "../context/MyContext";
 import { useRouter } from "next/navigation";
+import { MyContext } from "../Context/Context";
 
 const CartPage = () => {
   const { cartItems } = useContext(MyContext);
@@ -13,14 +13,14 @@ const CartPage = () => {
   const subtotal = cartItems.reduce((total, item) => total + item.price * 1, 0);
   return (
     <div className="flex justify-center items-center mt-8 px-24 py-16">
-      <div className="flex flex-col max-w-3xl p-6 space-y-4 sm:p-10 dark:bg-gray-50 dark:text-gray-800">
+      <div className="flex flex-col max-w-3xl p-6 space-y-4 sm:p-10 bg-gray-50 text-gray-800">
         <h2 className="text-xl font-semibold">Your cart {cartItems.length}</h2>
-        <ul className="flex flex-col divide-y dark:divide-gray-300">
+        <ul className="flex flex-col divide-y divide-gray-300">
           {cartItems.map(({ images, title, price, id, thumbnail }) => (
             <li className="flex flex-col py-6 sm:flex-row sm:justify-between">
               <div className="flex w-full space-x-2 sm:space-x-4">
                 <img
-                  className="flex-shrink-0 object-cover w-20 h-20 dark:border- rounded outline-none sm:w-32 sm:h-32 dark:bg-gray-500"
+                  className="flex-shrink-0 object-cover w-20 h-20 border- rounded outline-none sm:w-32 sm:h-32 bg-gray-500"
                   src={thumbnail}
                   alt="Polaroid camera"
                 />
@@ -30,11 +30,11 @@ const CartPage = () => {
                       <h3 className="text-lg font-semibold leading-snug sm:pr-8">
                         {title}
                       </h3>
-                      <p className="text-sm dark:text-gray-600">Classic</p>
+                      <p className="text-sm text-gray-600">Classic</p>
                     </div>
                     <div className="text-right">
                       <p className="text-lg font-semibold"> {price}€</p>
-                      <p className="text-sm line-through dark:text-gray-400">
+                      <p className="text-sm line-through text-gray-400">
                         {price + 9}€
                       </p>
                     </div>
@@ -81,7 +81,7 @@ const CartPage = () => {
             Total amount:
             <span className="font-semibold">{subtotal.toFixed(2)} €</span>
           </p>
-          <p className="text-sm dark:text-gray-600">
+          <p className="text-sm text-gray-600">
             Not including taxes and shipping costs
           </p>
         </div>
@@ -89,14 +89,14 @@ const CartPage = () => {
           <button
             onClick={navigateToCheckout}
             type="button"
-            className="px-6 py-2 border rounded-md dark:border-violet-600"
+            className="px-6 py-2 border rounded-md border-violet-600"
           >
             Back
             <span className="sr-only sm:not-sr-only">to shop</span>
           </button>
           <button
             type="button"
-            className="px-6 py-2 border rounded-md dark:bg-violet-600 dark:text-gray-50 dark:border-violet-600"
+            className="px-6 py-2 border rounded-md bg-violet-600 text-gray-50 border-violet-600"
           >
             <span className="sr-only sm:not-sr-only">Continue to</span>Checkout
           </button>

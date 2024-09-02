@@ -6,8 +6,11 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { IoMdClose } from "react-icons/io";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+import { MyContext } from "../Context/Context";
 const Navbar = () => {
+  const { cartItems, handleAddedCart } = useContext(MyContext);
+
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const [isVisible, setIsVisible] = useState(true);
@@ -89,12 +92,15 @@ const Navbar = () => {
               <Link
                 className={`${
                   pathName === "/cart"
-                    ? " text-xl uppercase text-yellow-400"
-                    : "text-xl uppercase text-white"
+                    ? " text-xl gap-2 items-center uppercase flex text-yellow-400"
+                    : "text-xl gap-2 items-center uppercase flex text-white"
                 }`}
                 href={"/cart"}
               >
-                <AiOutlineShoppingCart />
+                <AiOutlineShoppingCart />{" "}
+                <span className="bg-red-600 rounded-full p-1">
+                  {cartItems.length}
+                </span>
               </Link>
             </li>
             <li>

@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useContext } from "react";
 import ReactStars from "react-rating-stars-component";
-import { MyContext } from "../context/MyContext";
+import { MyContext } from "../Context/Context";
 
 const ProductsCard = ({ product }) => {
   const { images, title, price, id, description, thumbnail, rating } = product;
