@@ -6,8 +6,17 @@ import Swal from "sweetalert2";
 export const MyContext = createContext([]);
 
 const ContextProvider = ({ children }) => {
+  // cart state
   const [cartItems, setCartItems] = useState([]);
 
+  // // search state
+  // const [searchQuery, setSearchQuery] = useState("");
+  // // Filter products based on search query
+  // const filteredProducts = products.filter((product) =>
+  //   product.name.toLowerCase().includes(searchQuery.toLowerCase())
+  // );
+
+  // cart fun start
   const handleAddedCart = (item) => {
     // setCartItems((prevCart) => [...prevCart, item]);
     console.log("added to cart");
@@ -32,6 +41,7 @@ const ContextProvider = ({ children }) => {
     });
   };
   console.log(cartItems.length);
+  // cart fun end
 
   return (
     <MyContext.Provider value={{ cartItems, handleAddedCart }}>

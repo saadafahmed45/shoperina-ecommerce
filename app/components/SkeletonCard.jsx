@@ -1,7 +1,7 @@
 import React from "react";
 
 const SkeletonCard = () => {
-  const item = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }];
+  const item = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }];
 
   return (
     <div className=" mx-8 lg:mx-4 my-16  space-x-4 ">

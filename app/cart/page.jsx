@@ -7,8 +7,11 @@ import { MyContext } from "../Context/Context";
 const CartPage = () => {
   const { cartItems } = useContext(MyContext);
   const router = useRouter();
-  const navigateToCheckout = () => {
+  const navigateToBackHome = () => {
     router.push("/");
+  };
+  const navigateToCheckout = () => {
+    router.push("/cart/checkout");
   };
   const subtotal = cartItems.reduce((total, item) => total + item.price * 1, 0);
 
@@ -91,7 +94,7 @@ const CartPage = () => {
         </div>
         <div className="flex justify-end space-x-4">
           <button
-            onClick={navigateToCheckout}
+            onClick={navigateToBackHome}
             type="button"
             className="px-6 py-2 border rounded-md border-violet-600"
           >
@@ -99,6 +102,7 @@ const CartPage = () => {
             <span className="sr-only sm:not-sr-only">to shop</span>
           </button>
           <button
+            onClick={navigateToCheckout}
             type="button"
             className="px-6 py-2 border rounded-md bg-violet-600 text-gray-50 border-violet-600"
           >
