@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Shoperina E-commerce",
-  description: "Develop by Mohammad Haolader",
+  description: "Develop by  Mohammad Haolader",
 };
 
 export default function RootLayout({ children }) {
