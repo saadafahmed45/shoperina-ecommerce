@@ -2,15 +2,17 @@
 
 // import { singleProductsApi } from "@/app/api/productsApi";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ReactStars from "react-rating-stars-component";
 import loading from "./../../loading";
+import { MyContext } from "../../Context/Context";
 
 const SingleProduct = ({ params }) => {
   const id = params.id;
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { cartItems, handleAddedCart } = useContext(MyContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -148,7 +150,10 @@ const SingleProduct = ({ params }) => {
                 </div>
 
                 <div className="flex space-x-4 mb-6">
-                  <button className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600">
+                  <button
+                    onClick={() => handleAddedCart(product)}
+                    className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600"
+                  >
                     Add to Cart
                   </button>
                   <button className="bg-gray-300 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-400">
