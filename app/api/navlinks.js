@@ -28,6 +28,6 @@ export const navlinks = [
   {
     id: 4,
     name: "Search",
-    url: "/searchProducts",
+    url: "/search-products",
   },
 ];

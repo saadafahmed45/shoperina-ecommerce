@@ -98,9 +98,9 @@ const Navbar = () => {
                 href={"/cart"}
               >
                 <AiOutlineShoppingCart />{" "}
-                <span className="bg-red-600 rounded-full p-1">
-                  {cartItems.length}
-                </span>
+            
+                 ({cartItems.length})
+        
               </Link>
             </li>
             <li>
@@ -134,11 +134,11 @@ const Navbar = () => {
               {navlinks.map((nav, index) => (
                 <li key={nav.id} className="py-4 text-white">
                   <Link
-                   className={`${
-                    pathName === nav.url
-                      ? " text-md uppercase text-yellow-400"
-                      : "text-md uppercase text-white"
-                  }`}
+                    className={`${
+                      pathName === nav.url
+                        ? " text-md uppercase text-yellow-400"
+                        : "text-md uppercase text-white"
+                    }`}
                     href={nav.url}
                   >
                     {nav.name}
@@ -155,9 +155,7 @@ const Navbar = () => {
                   href={"/cart"}
                 >
                   <AiOutlineShoppingCart />{" "}
-                  <span className="bg-red-600 rounded-full p-1">
-                    {cartItems.length}
-                  </span>
+                  <span className=" p-1">{cartItems.length}</span>
                 </Link>
               </li>
               <li>
