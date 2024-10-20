@@ -7,7 +7,7 @@ import { MyContext } from "../Context/Context";
 import { motion } from "framer-motion"; // Import motion from framer-motion
 
 const ProductsCard = ({ product }) => {
-  const { images, title, price, id, rating } = product;
+  const { thumbnail, images, title, price, id, rating } = product;
   const { handleAddedCart } = useContext(MyContext);
 
   return (
@@ -15,9 +15,9 @@ const ProductsCard = ({ product }) => {
       initial={{ opacity: 0 }} // Set initial opacity for fade-in
       animate={{ opacity: 1 }} // Animate to full opacity
       transition={{ duration: 0.8 }} // Set the duration of the fade-in effect
-      className="rounded-xl bg-white p-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300"
+      className="rounded-xl bg-white p-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 groupe"
     >
-      <a href="#">
+      <div>
         <Link
           href={`/products/${id}`}
           className="relative flex items-end overflow-hidden rounded-xl"
@@ -25,14 +25,17 @@ const ProductsCard = ({ product }) => {
           <Image
             width={100}
             height={100}
-            src={images[0]}
-            alt="Product Image"
-            className="object-contain w-full h-52 cursor-pointer"
+            src={thumbnail}
+            alt={title}
+            className="object-cover w-full h-52 cursor-pointer transition-all"
           />
         </Link>
 
         <div className="mt-1 p-2">
-          <h2 className="text-slate-700"> {title.slice(0, 25)}..</h2>
+          <h2 className="text-slate-700 overflow-hidden">
+            {" "}
+            {title.slice(0, 25)}..
+          </h2>
           <div className="mt-3 flex items-end justify-between flex-col md:flex-row">
             <p className="text-lg font-bold text-blue-500">${price}</p>
 
@@ -61,7 +64,7 @@ const ProductsCard = ({ product }) => {
             </div>
           </div>
         </div>
-      </a>
+      </div>
     </motion.article>
   );
 };

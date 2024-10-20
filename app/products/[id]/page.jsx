@@ -123,19 +123,30 @@ const SingleProduct = ({ params }) => {
         {/* Breadcrumb */}
         {/* Main Content */}
         <main className="py-6">
-          <div className="container mx-auto flex flex-col md:flex-row bg-white shadow-lg rounded-lg">
+          <div className="container py-4 mx-auto gap-8 flex item-center flex-col md:flex-row bg-white shadow-lg rounded-lg">
             {/* Product Image */}
-            <div className="w-full md:w-1/2 p-6">
-              <img
-                src={images[0]}
-                alt={title}
-                loading="lazy"
-                className="w-full h-full object-cover rounded-lg"
-              />
+            <div className="flex-1">
+              <div className="w-full  p-6">
+                <img
+                  src={thumbnail}
+                  alt={title}
+                  loading="lazy"
+                  className="w-full lg:w-full h-full object-cover rounded-lg"
+                />
+              </div>
+              <div className="mt-6 flex justify-center gap-6 mx-auto">
+                {product?.images?.length
+                  ? product?.images.map((imageItem) => (
+                      <div key={imageItem} className="p-4 shadow-md">
+                        <img className="w-24" src={imageItem} alt="" />
+                      </div>
+                    ))
+                  : null}
+              </div>
             </div>
 
             {/* Product Details */}
-            <div className="w-full md:w-1/2 p-6 flex flex-col justify-between">
+            <div className="w-full flex-2 md:w-1/2 p-6 flex flex-col justify-between">
               <div>
                 <h1 className="text-3xl font-bold mb-4">{title}</h1>
                 <p className="text-gray-600 mb-4">{description}</p>

@@ -1,7 +1,8 @@
 "use client";
-
+import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import { redirect, useRouter } from "next/navigation";
 
 export const MyContext = createContext([]);
 
@@ -9,18 +10,54 @@ const ContextProvider = ({ children }) => {
   // cart state
   const [cartItems, setCartItems] = useState([]);
 
-  // // search state
-  // const [searchQuery, setSearchQuery] = useState("");
-  // // Filter products based on search query
-  // const filteredProducts = products.filter((product) =>
-  //   product.name.toLowerCase().includes(searchQuery.toLowerCase())
-  // );
+  // products data fetch start
+  const [visible, setVisible] = useState(8);
+  // main products
+  const [products, setProducts] = useState([]);
+  // loading products
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    axios
+      .get(`https://dummyjson.com/products/`)
+      .then((response) => {
+        setProducts(response.data.products);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  const visibleProducts = products.slice(0, visible);
+
+  const loadMore = () => {
+    setVisible(visible + 8);
+  };
+  // products data fetch end
+  const router = useRouter();
   // cart fun start
   const handleAddedCart = (item) => {
-    // setCartItems((prevCart) => [...prevCart, item]);
-    console.log("added to cart");
+    console.log(item);
 
+    let copyExistingCartItem = [...cartItems];
+    const findIndexOfCurrentItem = copyExistingCartItem.findIndex(
+      (cartItems) => cartItems.id == item.id
+    );
+    console.log(findIndexOfCurrentItem);
+
+    if (findIndexOfCurrentItem === -1) {
+      copyExistingCartItem.push({
+        ...item,
+        quantity: 1,
+        totalPrice: item.price,
+      });
+    } else {
+      router.push("/cart");
+    }
+    setCartItems(copyExistingCartItem);
+    localStorage.setItem("cartItems", JSON.stringify(copyExistingCartItem));
+    console.log(cartItems);
     Swal.fire({
       title: "Are you sure?",
       text: "Your product are added to cart !",
@@ -44,7 +81,17 @@ const ContextProvider = ({ children }) => {
   // cart fun end
 
   return (
-    <MyContext.Provider value={{ cartItems, handleAddedCart }}>
+    <MyContext.Provider
+      value={{
+        cartItems,
+        handleAddedCart,
+        visibleProducts,
+        visible,
+        loadMore,
+        products,
+        loading,
+      }}
+    >
       {children}
     </MyContext.Provider>
   );
