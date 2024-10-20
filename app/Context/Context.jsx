@@ -2,7 +2,7 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export const MyContext = createContext([]);
 
@@ -12,9 +12,7 @@ const ContextProvider = ({ children }) => {
 
   // products data fetch start
   const [visible, setVisible] = useState(8);
-  // main products
   const [products, setProducts] = useState([]);
-  // loading products
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -35,16 +33,15 @@ const ContextProvider = ({ children }) => {
     setVisible(visible + 8);
   };
   // products data fetch end
-  const router = useRouter();
-  // cart fun start
-  const handleAddedCart = (item) => {
-    console.log(item);
 
+  const router = useRouter();
+
+  // cart function start
+  const handleAddedCart = (item) => {
     let copyExistingCartItem = [...cartItems];
     const findIndexOfCurrentItem = copyExistingCartItem.findIndex(
-      (cartItems) => cartItems.id == item.id
+      (cartItem) => cartItem.id === item.id
     );
-    console.log(findIndexOfCurrentItem);
 
     if (findIndexOfCurrentItem === -1) {
       copyExistingCartItem.push({
@@ -52,33 +49,38 @@ const ContextProvider = ({ children }) => {
         quantity: 1,
         totalPrice: item.price,
       });
+      setCartItems(copyExistingCartItem);
+      localStorage.setItem("cartItems", JSON.stringify(copyExistingCartItem));
+
+      Swal.fire({
+        title: "Product added to cart!",
+        text: "Would you like to view your cart?",
+        icon: "success",
+        showCancelButton: true,
+        confirmButtonText: "Yes, go to cart",
+        cancelButtonText: "Continue shopping",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          router.push("/cart");
+        }
+      });
     } else {
-      router.push("/cart");
+      Swal.fire({
+        title: "Item already in the cart",
+        text: "This product is already in your cart. Would you like to view it?",
+        icon: "info",
+        showCancelButton: true,
+        confirmButtonText: "Go to cart",
+        cancelButtonText: "Keep shopping",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          router.push("/cart");
+        }
+      });
     }
-    setCartItems(copyExistingCartItem);
-    localStorage.setItem("cartItems", JSON.stringify(copyExistingCartItem));
-    console.log(cartItems);
-    Swal.fire({
-      title: "Are you sure?",
-      text: "Your product are added to cart !",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, added it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        setCartItems((prevCart) => [...prevCart, item]);
-        Swal.fire({
-          title: "Added!",
-          text: "Your Product has been Added.",
-          icon: "success",
-        });
-      }
-    });
   };
-  console.log(cartItems.length);
-  // cart fun end
+
+  // cart function end
 
   return (
     <MyContext.Provider
@@ -90,6 +92,7 @@ const ContextProvider = ({ children }) => {
         loadMore,
         products,
         loading,
+        setCartItems
       }}
     >
       {children}

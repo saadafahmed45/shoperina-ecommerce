@@ -1,18 +1,17 @@
 "use client";
 
-// import { singleProductsApi } from "@/app/api/productsApi";
 import Link from "next/link";
 import React, { useContext, useEffect, useState } from "react";
 import ReactStars from "react-rating-stars-component";
-import loading from "./../../loading";
 import { MyContext } from "../../Context/Context";
 
 const SingleProduct = ({ params }) => {
   const id = params.id;
-  const [product, setProduct] = useState([]);
+  const [product, setProduct] = useState({});
+  const [mainImage, setMainImage] = useState(""); // Main image state
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { cartItems, handleAddedCart } = useContext(MyContext);
+  const { handleAddedCart } = useContext(MyContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,6 +22,7 @@ const SingleProduct = ({ params }) => {
         }
         const result = await response.json();
         setProduct(result);
+        setMainImage(result.thumbnail); // Set initial main image
         setLoading(false);
       } catch (error) {
         setError(error);
@@ -126,19 +126,26 @@ const SingleProduct = ({ params }) => {
           <div className="container py-4 mx-auto gap-8 flex item-center flex-col md:flex-row bg-white shadow-lg rounded-lg">
             {/* Product Image */}
             <div className="flex-1">
-              <div className="w-full  p-6">
+              <div className="w-full p-6">
                 <img
-                  src={thumbnail}
+                  src={mainImage} // Main image changes here
                   alt={title}
-                  loading="lazy"
-                  className="w-full lg:w-full h-full object-cover rounded-lg"
+                  className="w-full h-96 object-contain rounded-lg"
                 />
               </div>
               <div className="mt-6 flex justify-center gap-6 mx-auto">
-                {product?.images?.length
-                  ? product?.images.map((imageItem) => (
-                      <div key={imageItem} className="p-4 shadow-md">
-                        <img className="w-24" src={imageItem} alt="" />
+                {images?.length
+                  ? images.map((imageItem, index) => (
+                      <div
+                        key={index}
+                        className="p-2 shadow-md cursor-pointer"
+                        onClick={() => setMainImage(imageItem)} // Clicking the thumbnail changes the main image
+                      >
+                        <img
+                          className="w-24 h-24 object-contain"
+                          src={imageItem}
+                          alt=""
+                        />
                       </div>
                     ))
                   : null}
@@ -171,7 +178,7 @@ const SingleProduct = ({ params }) => {
                     Wishlist
                   </button>
                 </div>
-                {/* rate  */}
+                {/* Rating */}
                 <div className="flex flex-col gap-4">
                   <span> Brand: {brand}</span>{" "}
                   <span>
