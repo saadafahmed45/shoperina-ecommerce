@@ -52,7 +52,7 @@ const Navbar = () => {
 
   return (
     <header
-      className={`fixed top-0 z-50 w-full bg-white  transition-transform duration-300 ${
+      className={`fixed top-0 z-50 w-full bg-white shadow-md transition-transform duration-300 ${
         isVisible ? "translate-y-0" : "-translate-y-full"
       }`}
     >
@@ -106,7 +106,7 @@ const Navbar = () => {
       {open && (
         <div
           ref={dropdownRef}
-          className="lg:hidden fixed top-16 right-0 left-0 bg-gray-900 text-center z-20 py-8"
+          className="lg:hidden fixed top-16 right-0 left-0 bg-white text-center z-20 py-8"
         >
           <nav className="flex flex-col space-y-6 text-gray-950">
             {navlinks.map((nav) => (
