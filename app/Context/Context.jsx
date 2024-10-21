@@ -10,6 +10,14 @@ const ContextProvider = ({ children }) => {
   // cart state
   const [cartItems, setCartItems] = useState([]);
 
+  // Load cart items from localStorage on component mount
+  useEffect(() => {
+    const storedCartItems = JSON.parse(localStorage.getItem("cartItems"));
+    if (storedCartItems) {
+      setCartItems(storedCartItems);
+    }
+  }, []);
+
   // products data fetch start
   const [visible, setVisible] = useState(8);
   const [products, setProducts] = useState([]);
@@ -32,11 +40,12 @@ const ContextProvider = ({ children }) => {
   const loadMore = () => {
     setVisible(visible + 8);
   };
-  // products data fetch end
 
   const router = useRouter();
 
-  // cart function start
+  // Cart Functions Start
+
+  // Add to cart
   const handleAddedCart = (item) => {
     let copyExistingCartItem = [...cartItems];
     const findIndexOfCurrentItem = copyExistingCartItem.findIndex(
@@ -80,7 +89,59 @@ const ContextProvider = ({ children }) => {
     }
   };
 
-  // cart function end
+  // Increment quantity
+  const incrementQuantity = (id) => {
+    const updatedCart = cartItems.map((item) => {
+      if (item.id === id) {
+        return {
+          ...item,
+          quantity: item.quantity + 1,
+          totalPrice: (item.quantity + 1) * item.price,
+        };
+      }
+      return item;
+    });
+    setCartItems(updatedCart);
+    localStorage.setItem("cartItems", JSON.stringify(updatedCart));
+  };
+
+  // Decrement quantity
+  const decrementQuantity = (id) => {
+    const updatedCart = cartItems.map((item) => {
+      if (item.id === id && item.quantity > 1) {
+        return {
+          ...item,
+          quantity: item.quantity - 1,
+          totalPrice: (item.quantity - 1) * item.price,
+        };
+      }
+      return item;
+    });
+    setCartItems(updatedCart);
+    localStorage.setItem("cartItems", JSON.stringify(updatedCart));
+  };
+
+  // Remove from cart
+  const removeFromCart = (id) => {
+    const updatedCart = cartItems.filter((item) => item.id !== id);
+    setCartItems(updatedCart);
+    localStorage.setItem("cartItems", JSON.stringify(updatedCart));
+  };
+
+  // Calculate subtotal
+  // const calculateSubtotal = () => {
+  //   return cartItems.reduce((acc, item) => acc + item.totalPrice, 0);
+  // };
+
+  const subtotal = cartItems.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+  );
+
+  console.log(subtotal);
+  console.log(cartItems);
+
+  // Cart Functions End
 
   return (
     <MyContext.Provider
@@ -92,7 +153,10 @@ const ContextProvider = ({ children }) => {
         loadMore,
         products,
         loading,
-        setCartItems
+        incrementQuantity,
+        decrementQuantity,
+        removeFromCart,
+        subtotal,
       }}
     >
       {children}

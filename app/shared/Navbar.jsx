@@ -52,13 +52,13 @@ const Navbar = () => {
 
   return (
     <header
-      className={`fixed top-0 z-50 w-full bg-gray-900 backdrop-blur-lg transition-transform duration-300 ${
+      className={`fixed top-0 z-50 w-full bg-white  transition-transform duration-300 ${
         isVisible ? "translate-y-0" : "-translate-y-full"
       }`}
     >
       <div className="container mx-auto px-4 lg:px-20 py-4 flex justify-between items-center">
         {/* Logo */}
-        <Link href="/" className="text-2xl font-bold text-white">
+        <Link href="/" className="text-2xl font-bold text-gray-950">
           Shoperina
         </Link>
 
@@ -68,8 +68,8 @@ const Navbar = () => {
             <Link
               key={nav.id}
               href={nav.url}
-              className={`uppercase text-md ${
-                pathname === nav.url ? "text-yellow-400" : "text-white"
+              className={`uppercase font-semibold text-md ${
+                pathname === nav.url ? "text-yellow-400" : "text-gray-950"
               } hover:text-yellow-300`}
             >
               {nav.name}
@@ -79,7 +79,7 @@ const Navbar = () => {
           <Link
             href="/cart"
             className={`flex items-center gap-2 text-xl ${
-              pathname === "/cart" ? "text-yellow-400" : "text-white"
+              pathname === "/cart" ? "text-yellow-400" : "text-gray-950"
             }`}
           >
             <AiOutlineShoppingCart /> ({cartItems.length})
@@ -96,7 +96,7 @@ const Navbar = () => {
 
         {/* Mobile Hamburger Menu */}
         <div className="lg:hidden">
-          <button onClick={toggleButton} className="text-2xl text-white">
+          <button onClick={toggleButton} className="text-2xl text-gray-950">
             {open ? <IoMdClose /> : <GiHamburgerMenu />}
           </button>
         </div>
@@ -108,13 +108,13 @@ const Navbar = () => {
           ref={dropdownRef}
           className="lg:hidden fixed top-16 right-0 left-0 bg-gray-900 text-center z-20 py-8"
         >
-          <nav className="flex flex-col space-y-6 text-white">
+          <nav className="flex flex-col space-y-6 text-gray-950">
             {navlinks.map((nav) => (
               <Link
                 key={nav.id}
                 href={nav.url}
                 className={`uppercase text-md ${
-                  pathname === nav.url ? "text-yellow-400" : "text-white"
+                  pathname === nav.url ? "text-yellow-400" : "text-gray-950"
                 } hover:text-yellow-300`}
               >
                 {nav.name}
@@ -123,7 +123,7 @@ const Navbar = () => {
             <Link
               href="/cart"
               className={`flex items-center justify-center gap-2 text-xl ${
-                pathname === "/cart" ? "text-yellow-400" : "text-white"
+                pathname === "/cart" ? "text-yellow-600" : "text-gray-950"
               }`}
             >
               <AiOutlineShoppingCart /> ({cartItems.length})

@@ -5,7 +5,19 @@ import { useRouter } from "next/navigation";
 import { MyContext } from "../Context/Context";
 
 const CartPage = () => {
-  const { cartItems, setCartItems } = useContext(MyContext);
+  const {
+    cartItems,
+    handleAddedCart,
+    visibleProducts,
+    visible,
+    loadMore,
+    products,
+    loading,
+    incrementQuantity,
+    decrementQuantity,
+    removeFromCart,
+    subtotal,
+  } = useContext(MyContext);
   const router = useRouter();
 
   const navigateToBackHome = () => {
@@ -16,37 +28,6 @@ const CartPage = () => {
     router.push("/cart/checkout");
   };
 
-  const incrementQuantity = (id) => {
-    setCartItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
-      )
-    );
-  };
-
-  const decrementQuantity = (id) => {
-    setCartItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === id && item.quantity > 1
-          ? { ...item, quantity: item.quantity - 1 }
-          : item
-      )
-    );
-  };
-
-  const removeItem = (id) => {
-    setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
-  };
-
-  const subtotal = cartItems.reduce(
-    (total, item) => total + item.price * item.quantity,
-    0
-  );
-
-  if (cartItems.length === 0) {
-    return <p>Your cart is empty</p>;
-  }
-
   return (
     <div className="flex justify-center items-center mt-8 px-6 md:px-24 py-4 md:py-16">
       <div className="flex flex-col max-w-3xl p-6 space-y-4 sm:p-10 bg-gray-50 text-gray-800">
@@ -55,7 +36,7 @@ const CartPage = () => {
         </h2>
         <ul className="flex flex-col divide-y divide-gray-300">
           {cartItems.map(
-            ({ images, title, price, id, thumbnail, quantity }) => (
+            ({ images, title, price, id, thumbnail, quantity, totalPrice }) => (
               <li
                 key={id}
                 className="flex flex-col py-6 sm:flex-row sm:justify-between"
@@ -74,7 +55,7 @@ const CartPage = () => {
                         </h3>
                       </div>
                       <div className="text-right">
-                        <p className="text-lg font-semibold">{price}€</p>
+                        <p className="text-lg font-semibold">{totalPrice?.toFixed(2)}€</p>
                         <p className="text-sm line-through text-gray-400">
                           {price + 9}€
                         </p>
@@ -97,7 +78,7 @@ const CartPage = () => {
                         +
                       </button>
                       <button
-                        onClick={() => removeItem(id)}
+                        onClick={() => removeFromCart(id)}
                         type="button"
                         className="ml-4 text-red-500"
                       >
@@ -113,7 +94,7 @@ const CartPage = () => {
         <div className="space-y-1 text-right">
           <p>
             Total amount:{" "}
-            <span className="font-semibold">{subtotal.toFixed(2)} €</span>
+            <span className="font-semibold">{subtotal?.toFixed(2)} $</span>
           </p>
           <p className="text-sm text-gray-600">
             Not including taxes and shipping costs

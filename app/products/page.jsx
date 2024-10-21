@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import ProductsCard from "../components/ProductsCard";
 import axios from "axios";
 import { MyContext } from "../Context/Context";
+import SkeletonCard from "../components/SkeletonCard";
 
 const Products = () => {
   const { visibleProducts, visible, loadMore, products, loading } =
@@ -17,11 +18,12 @@ const Products = () => {
         <h2 className="text-xl font-semibold">Choose the Products:</h2>
       </div>
 
-        {loading && (
-         <div className="flex items-center justify-center p-16">
-      <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-violet-600"></div>
-    </div>
-        )}
+      {loading && (
+        //      <div className="flex items-center justify-center p-16">
+        //   <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-violet-600"></div>
+        // </div>
+        <SkeletonCard />
+      )}
       <div className="grid grid-cols-2 gap-2 space-y-4 md:gap-6 md:grid-cols-2 lg:grid-cols-4 items-center">
         {visibleProducts.map((product) => (
           <ProductsCard product={product} key={product.id} />

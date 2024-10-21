@@ -1,6 +1,21 @@
-import React from "react";
+"use client";
+import React, { useContext } from "react";
+import { MyContext } from "../../Context/Context";
 
 function CheckoutPage() {
+  const {
+    cartItems,
+    handleAddedCart,
+    visibleProducts,
+    visible,
+    loadMore,
+    products,
+    loading,
+    incrementQuantity,
+    decrementQuantity,
+    removeFromCart,
+    subtotal,
+  } = useContext(MyContext);
   return (
     <div className="min-h-screen bg-gray-100 p-6">
       <div className="max-w-3xl mx-auto">
@@ -10,27 +25,37 @@ function CheckoutPage() {
         <div className="bg-white rounded-lg shadow p-6 mb-6">
           <h3 className="text-xl font-medium mb-4">Your Cart</h3>
           <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <h4 className="text-lg font-medium">Product Name</h4>
-                <p className="text-sm text-gray-500">
-                  Description of the product
-                </p>
-              </div>
-              <div className="text-lg font-medium">$29.99</div>
-            </div>
-            <div className="flex items-center justify-between">
-              <div>
-                <h4 className="text-lg font-medium">Another Product</h4>
-                <p className="text-sm text-gray-500">Another description</p>
-              </div>
-              <div className="text-lg font-medium">$19.99</div>
-            </div>
+            {cartItems.map(
+              ({
+                id,
+                images,
+                title,
+                price,
+               
+                thumbnail,
+                quantity,
+                totalPrice,
+                description,
+              }) => (
+                <div key={id} className="flex items-center justify-between">
+                  <div>
+                    <h4 className="text-lg font-medium">{title}</h4>
+                    <p className="text-sm text-gray-500">
+                      {description.slice(0, 90)}...
+                    </p>
+                  </div>
+                  <div className="text-lg font-medium">
+                    ${totalPrice.toFixed(2)}
+                  </div>
+                </div>
+              )
+            )}
+
             <div className="flex items-center justify-between">
               <div>
                 <h4 className="text-lg font-medium">Total</h4>
               </div>
-              <div className="text-lg font-bold">$49.98</div>
+              <div className="text-lg font-bold">${subtotal.toFixed(2)}</div>
             </div>
           </div>
         </div>
