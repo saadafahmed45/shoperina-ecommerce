@@ -63,12 +63,9 @@ const SingleProduct = ({ params }) => {
 
   return (
     <div>
-      <div className="bg-gray-100 min-h-screen font-sans px-4">
+      <div className="bg-white min-h-screen font-sans px-4 lg:px-16">
         {/* Breadcrumb */}
-        <nav
-          aria-label="breadcrumb"
-          className="w-full p-4 dark:bg-gray-100 dark:text-gray-800"
-        >
+        <nav aria-label="breadcrumb" className="w-full p-4 bg-white ">
           <ol className="flex h-8 space-x-2">
             <li className="flex items-center">
               <Link
@@ -136,7 +133,7 @@ const SingleProduct = ({ params }) => {
                 <img
                   src={mainImage} // Main image changes here
                   alt={title}
-                  className="w-full h-96 object-contain rounded-lg"
+                  className="w-full h-60 lg:h-96 object-contain rounded-lg"
                 />
               </div>
               <div className="mt-6 flex justify-center gap-6 mx-auto">
@@ -227,9 +224,9 @@ const SingleProduct = ({ params }) => {
           </div>
 
           {/* review secion */}
-          <div className="p-8 sp">
-            <h2 className="text-xl  lg:text-2xl font-bold ">
-              Our customers are saying{" "}
+          <div className="p-2 sp">
+            <h2 className="text-xl py-6 lg:text-2xl font-bold ">
+              Our customers are saying:{" "}
             </h2>
             <div classNane="space-y-4">
               {reviews?.map(
@@ -264,10 +261,10 @@ const SingleProduct = ({ params }) => {
                     </div>
                     <div className="p-4 space-y-2 text-sm dark:text-gray-600">
                       <p>{comment}</p>
-                      <p>
+                      {/* <p>
                         Donec eget ultricies diam, eu molestie arcu. Etiam nec
                         lacus eu mauris cursus venenatis.
-                      </p>
+                      </p> */}
                     </div>
                   </div>
                 )
