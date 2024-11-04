@@ -15,9 +15,9 @@ const ProductsCard = ({ product }) => {
       initial={{ opacity: 0 }} // Set initial opacity for fade-in
       animate={{ opacity: 1 }} // Animate to full opacity
       transition={{ duration: 0.8 }} // Set the duration of the fade-in effect
-      className="rounded-xl bg-white p-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 groupe"
+      className="bg-white rounded-lg shadow-md overflow-hidden"
     >
-      <div>
+      {/* <div>
         <Link
           href={`/products/${id}`}
           className="relative flex items-end overflow-hidden rounded-xl"
@@ -64,7 +64,39 @@ const ProductsCard = ({ product }) => {
             </div>
           </div>
         </div>
+      </div> */}
+
+      {/* <div className="bg-white rounded-lg shadow-md overflow-hidden"> */}
+      <div className="relative h-48">
+        <Link href={`/products/${id}`}>
+          <img
+            src={product.thumbnail}
+            alt={product.title}
+            className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+          />
+        </Link>
       </div>
+      <div className="p-4">
+        <h2 className="text-lg font-semibold mb-2 truncate">{product.title}</h2>
+        <p className="text-sm text-gray-500 mb-2 line-clamp-2">
+          {product.description}
+        </p>
+        <div className="flex justify-between items-center">
+          <span className="text-lg font-bold">${product.price.toFixed(2)}</span>
+          <span className="px-2 py-1 bg-gray-200 text-gray-700 text-xs rounded-full">
+            {product.category}
+          </span>
+        </div>
+      </div>
+      <div className="p-4 pt-0">
+        <button
+          onClick={() => handleAddedCart(product)}
+          className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition-colors duration-300"
+        >
+          Add to Cart
+        </button>
+      </div>
+      {/* </div> */}
     </motion.article>
   );
 };
