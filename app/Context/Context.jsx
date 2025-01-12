@@ -25,7 +25,7 @@ const ContextProvider = ({ children }) => {
 
   useEffect(() => {
     axios
-      .get(`https://dummyjson.com/products/`)
+      .get(`https://dummyjson.com/products/category/mobile-accessories`)
       .then((response) => {
         setProducts(response.data.products);
         setLoading(false);

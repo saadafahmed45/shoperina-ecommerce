@@ -8,6 +8,7 @@ import { MyContext } from "../../Context/Context";
 const SingleProduct = ({ params }) => {
   const id = params.id;
   const [product, setProduct] = useState({});
+  const [relatedProducts, setRelatedProducts] = useState([]);
   const [mainImage, setMainImage] = useState(""); // Main image state
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -24,6 +25,14 @@ const SingleProduct = ({ params }) => {
         setProduct(result);
         setMainImage(result.thumbnail); // Set initial main image
         setLoading(false);
+
+
+        const relatedResponse = await fetch(
+          `https://dummyjson.com/products/category/${result.category}`
+        );
+        if (!relatedResponse.ok) throw new Error("Failed to fetch related products");
+        const relatedResult = await relatedResponse.json();
+        setRelatedProducts(relatedResult.products.filter((p) => p.id !== result.id));
       } catch (error) {
         setError(error);
       }
@@ -31,6 +40,8 @@ const SingleProduct = ({ params }) => {
 
     fetchData();
   }, []);
+
+  console.log(relatedProducts);
 
   const {
     images,
@@ -139,18 +150,18 @@ const SingleProduct = ({ params }) => {
               <div className="mt-6 flex justify-center gap-6 mx-auto">
                 {images?.length
                   ? images.map((imageItem, index) => (
-                      <div
-                        key={index}
-                        className="p-2 shadow-md cursor-pointer"
-                        onClick={() => setMainImage(imageItem)} // Clicking the thumbnail changes the main image
-                      >
-                        <img
-                          className="w-24 h-24 object-contain"
-                          src={imageItem}
-                          alt=""
-                        />
-                      </div>
-                    ))
+                    <div
+                      key={index}
+                      className="p-2 shadow-md cursor-pointer"
+                      onClick={() => setMainImage(imageItem)} // Clicking the thumbnail changes the main image
+                    >
+                      <img
+                        className="w-24 h-24 object-contain"
+                        src={imageItem}
+                        alt=""
+                      />
+                    </div>
+                  ))
                   : null}
               </div>
             </div>
