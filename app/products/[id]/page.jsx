@@ -111,7 +111,7 @@ const SingleProduct = ({ params }) => {
                 href={"/products"}
                 className="flex items-center px-1 capitalize hover:underline cursor-default"
               >
-                Productssss
+                Products
               </Link>
             </li>
             <li className="flex items-center space-x-2">
